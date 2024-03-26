@@ -4,7 +4,7 @@ import { authConfig } from "./auth.config";
 import { z } from "zod";
 import { fetchQuery } from "convex/nextjs";
 import { api } from "../../convex/_generated/api";
-
+import bcrypt from 'bcrypt';
 // async createUser(userData) {
 //   const userId = await fetchMutation(
 //     api.user.create,
@@ -50,7 +50,10 @@ export const { auth, signIn, signOut, handlers } = NextAuth({
             password,
           );
           if (!user) return null;
-          console.log(user);
+
+          const isMatch = await bcrypt.compare(password, user.password);
+          if (!isMatch) return null;
+
           return {
             id: user._id.toString(),
             username: user.username,

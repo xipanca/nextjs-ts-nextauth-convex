@@ -3,7 +3,7 @@
 import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { z } from "zod";
 import { api } from "../../../../../convex/_generated/api";
-
+import bcrypt from 'bcrypt';
 export async function createUser(
   prevState: { message: string; success: boolean },
   formData: FormData,
@@ -54,9 +54,11 @@ export async function createUser(
   }
 
   try {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(password, saltRounds)
     const user = await fetchMutation(api.user.create, {
       username: username,
-      password: password,
+      password: hashedPassword,
       provider: "credentials",
       email: email,
       role: "user",
