@@ -2,7 +2,7 @@
 
 import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { z } from "zod";
-import { api } from "../../../../../convex/_generated/api";
+import { api } from "../../../../../../convex/_generated/api";
 import bcrypt from 'bcrypt';
 export async function createUser(
   prevState: { message: string; success: boolean },

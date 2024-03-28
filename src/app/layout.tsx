@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import ConvexClientProvider from "@/providers/ConvexClientProvider";
 import AuthProvider from "@/providers/AuthProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import ToogleTheme from "@/components/toogleTheme";
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -25,7 +26,7 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable,
+          fontSans.variable
         )}
       >
         <ThemeProvider
@@ -36,6 +37,7 @@ export default function RootLayout({
         >
           <ConvexClientProvider>
             <AuthProvider>{children}</AuthProvider>
+            <ToogleTheme />
           </ConvexClientProvider>
         </ThemeProvider>
       </body>
